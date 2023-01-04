@@ -1,6 +1,14 @@
-test-custom-default-branch:
+test2-custom-default-branch:
   archive_on_destroy: false
-  default_branch: bleh
+  default_branch: asdf
+  visibility: public
+  auto_init: true
+  branch_protection:
+    - require_pull_request_reviews:
+        required_approving_review_count: 0
+
+test2-main-default-branch:
+  archive_on_destroy: false
   visibility: public
   auto_init: true
   branch_protection:
