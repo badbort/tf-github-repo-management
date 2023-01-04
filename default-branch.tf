@@ -30,6 +30,6 @@ resource "github_branch_default" "racwa" {
   repository = github_repository.racwa_repos[each.key].name
   branch     = each.value.default_branch
   depends_on = [
-    github_branch.racwa
+    null_resource.github_branch_create
   ]
 }
