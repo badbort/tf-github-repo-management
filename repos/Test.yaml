@@ -7,9 +7,10 @@ test2-custom-default-branch:
     - require_pull_request_reviews:
         required_approving_review_count: 0
 
-test2-main-default-branch:
+test3-main-default-branch:
   archive_on_destroy: false
   visibility: public
+  default_branch: main
   auto_init: true
   branch_protection:
     - require_pull_request_reviews:
