@@ -18,11 +18,11 @@ jobs:
     with:
       environment: main
       tf_apply_branch: main
-      tf_plan_args: -var github_token=${{secrets.GH_WRITE_TOKEN}}
-      tf_apply_args: -var github_token=${{secrets.GH_WRITE_TOKEN}}
       
     secrets: 
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
       GH_READ_TOKEN: ${{ secrets.GH_READ_TOKEN }}
+      SECRET_ENV: |
+        TF_VAR_github_token=${{secrets.GH_WRITE_TOKEN}}
