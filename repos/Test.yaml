@@ -1,6 +1,6 @@
 test-custom-default-branch:
   archive_on_destroy: false
-  default_branch: blah
+  default_branch: bleh
   visibility: public
   auto_init: true
   branch_protection:
