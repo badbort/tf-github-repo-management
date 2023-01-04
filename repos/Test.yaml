@@ -1,51 +1,4 @@
-# yaml-language-server: $schema=C:\Alek\racwa\github-repo-management\repos\schema.json
-
-codacy-test:
-  archive_on_destroy: false
-  default_branch: main
-  visibility: public
-  codacy:
-    pull_request_quality_settings: 
-      issue_threshold:
-        minimum_severity: Warning
-        threshold: 0
-      complexity_threshold: 50
-      coverage_threshold_with_decimals: 1
-      duplication_threshold: 4
-      diff_coverage_threshold: 12
-    commit_quality_settings:
-      issue_threshold:
-        minimum_severity: Warning
-        threshold: 0
-      complexity_threshold: 50
-      coverage_threshold_with_decimals: 1
-      duplication_threshold: 4
-      diff_coverage_threshold: 12
-
-useless-repo2:
-  archive_on_destroy: false
-  default_branch: main
-  visibility: public
-  teams:
-    Sample Team: push
-  branch_protection:
-    - require_status_checks:
-        contexts: [Codacy Static Code Analysis]
-        strict: true
-
-useless-repo3:
-  archive_on_destroy: false
-  default_branch: main
-  visibility: public
-  auto_init: false
-  branch_protection:
-    - require_status_checks:
-        contexts: [Codacy Static Code Analysis]
-        strict: true
-      require_pull_request_reviews:
-        required_approving_review_count: 1
-
-test-custom-branch-1:
+test-custom-default-branch:
   archive_on_destroy: false
   default_branch: blah
   visibility: public
@@ -53,9 +6,3 @@ test-custom-branch-1:
   branch_protection:
     - require_pull_request_reviews:
         required_approving_review_count: 0
-
-test-custom-branch-2:
-  archive_on_destroy: false
-  default_branch: bert
-  visibility: public
-  auto_init: false

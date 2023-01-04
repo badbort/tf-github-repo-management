@@ -75,12 +75,12 @@ resource "null_resource" "enable_codacy" {
 # Ensures the codacy project token is added. Adding a repo to codacy using the api will not create a project api token. This token
 # is used in pipelines/workflows to upload code coverage. The script executed by this resource will create one if none exist
 resource "null_resource" "codacy_project_token" {
-  for_each = local.codacy_repo_settings
+  for_each   = local.codacy_repo_settings
   depends_on = [null_resource.enable_codacy]
 
   triggers = {
-    name             = each.value.name
-    owner            = var.github_organization
+    name  = each.value.name
+    owner = var.github_organization
   }
 
   provisioner "local-exec" {

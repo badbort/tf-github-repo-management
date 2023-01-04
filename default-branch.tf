@@ -5,18 +5,18 @@
 # - If branch already exists, do nothing
 # - If branch doesn't exist, create the new branch which points to the same commit on HEAD
 resource "null_resource" "github_branch_create" {
-  for_each = { for name, r in local.repos_with_defaults : r.name => r if r.auto_init && r.default_branch != "main"}
+  for_each = { for name, r in local.repos_with_defaults : r.name => r if r.auto_init && r.default_branch != "main" }
 
   triggers = {
     branch = each.value.default_branch
   }
 
   provisioner "local-exec" {
-    when = create
-    command     = ".'${path.module}\\scripts\\create-default-branch.ps1' -GITHUB_TOKEN \"${var.github_token}\" -BranchName \"${self.triggers.branch}\" -RepositoryOwner \"${var.github_organization}\" -RepositoryName \"${self.triggers.name}\" "
+    when    = create
+    command = ".'${path.module}\\scripts\\create-default-branch.ps1' -GITHUB_TOKEN \"${var.github_token}\" -BranchName \"${self.triggers.branch}\" -RepositoryOwner \"${var.github_organization}\" -RepositoryName \"${self.triggers.name}\" "
     environment = {
       GITHUB_TOKEN = var.github_token
-     }
+    }
   }
 
   depends_on = [
