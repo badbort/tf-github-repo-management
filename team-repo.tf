@@ -17,7 +17,7 @@ resource "github_team_repository" "team_access" {
 resource "github_team_repository" "admin_access" {
   for_each = local.repos_with_defaults
 
-  team_id    = github_team.teams["Admin2"].id
+  team_id    = github_team.teams["Admin-TfTest"].id
   repository = github_repository.racwa_repos[each.key].name
   permission = "admin"
 
@@ -31,7 +31,7 @@ resource "github_team_repository" "admin_access" {
 resource "github_team_repository" "default_access" {
   for_each = local.repos_with_defaults
 
-  team_id    = github_team.teams["Default Access2"].id
+  team_id    = github_team.teams["Default Access-TfTest"].id
   repository = github_repository.racwa_repos[each.key].name
   permission = "push"
 
@@ -45,7 +45,7 @@ resource "github_team_repository" "default_access" {
 resource "github_team_repository" "maintainers_access" {
   for_each = local.repos_with_defaults
 
-  team_id    = github_team.teams["Maintainers2"].id
+  team_id    = github_team.teams["Maintainers-TfTest"].id
   repository = github_repository.racwa_repos[each.key].name
   permission = "push"
 
