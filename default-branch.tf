@@ -13,19 +13,19 @@ resource "null_resource" "github_branch_create" {
 
   provisioner "local-exec" {
     when    = create
-    command = ".'${path.module}\\scripts\\create-default-branch.ps1' -GITHUB_TOKEN \"${var.github_token}\" -BranchName \"${self.triggers.branch}\" -RepositoryOwner \"${var.github_organization}\" -RepositoryName \"${self.triggers.name}\" "
+    command = ".'${path.module}\\scripts\\create-default-branch.ps1' -GITHUB_TOKEN \"${var.github_token}\" -BranchName \"${self.triggers.branch}\" -RepositoryOwner \"${var.github_organization}\" -RepositoryName \"${each.value.name}\" "
     environment = {
       GITHUB_TOKEN = var.github_token
     }
   }
 
   depends_on = [
-    github_repository.racwa_repos[each.key].name
+    github_repository.racwa_repos[each.key]
   ]
 }
 
 resource "github_branch_default" "racwa" {
-  for_each = { for name, r in local.repos_with_defaults : r.name => r if r.auto_init }
+  for_each = { for name, r in local.repos_with_defaults : name => r if r.auto_init }
 
   repository = github_repository.racwa_repos[each.key].name
   branch     = each.value.default_branch

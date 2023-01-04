@@ -20,42 +20,35 @@ locals {
 
   # Process defaults for repos defined in yaml files
   yaml_repos_with_defaults = { for k, r in local.github_repos : k => {
-    name                    = k
-    description             = try(r.description, "")
-    visibility              = try(r.visibility, "internal")
-    has_issues              = try(r.has_issues, false)
-    has_projects            = try(r.has_projects, false)
-    has_wiki                = try(r.has_wiki, false)
-    is_template             = try(r.is_template, false)
-    allow_merge_commit      = try(r.allow_merge_commit, true)
-    allow_squash_merge      = try(r.allow_squash_merge, true)
-    allow_rebase_merge      = try(r.allow_rebase_merge, true)
-    delete_branch_on_merge  = try(r.delete_branch_on_merge, true)
-    has_downloads           = try(r.has_downloads, false)
-    auto_init               = try(r.auto_init, true)
-    archived                = try(r.archived, false)
-    archive_on_destroy      = try(r.archive_on_destroy, true)
-    vulnerability_alerts    = try(r.vulnerability_alerts, true)
-    default_branch          = try(r.default_branch, "master")
-    disable_default_write   = try(r.disable_default_write, false)
-    create_app_registration = try(r.create_app_registration, false)
-    enabled                 = try(r.enabled, true)
-    template                = try(r.template, null)
-    teams                   = try(r.teams, null)
-    deploy_keys             = try(r.deploy_keys, [])
-    topics                  = try(r.topics, [])
-    gitignore_template      = try(r.gitignore_template, null)
-    homepage_url            = try(r.homepage_url, null)
-    permission              = try(r.permission, "push")
-    #disable_codacy_check    = try(r.disable_codacy_check, false)
-    enforce_codacy_check = try(r.enforce_codacy_check, true)
-    codacy               = try(r.codacy, null) # See codacy.tf for more info
-
-
-
+    name                                  = try(r.name, k)
+    description                           = try(r.description, "")
+    visibility                            = try(r.visibility, "internal")
+    has_issues                            = try(r.has_issues, false)
+    has_projects                          = try(r.has_projects, false)
+    has_wiki                              = try(r.has_wiki, false)
+    is_template                           = try(r.is_template, false)
+    allow_auto_merge                      = try(r.allow_auto_merge, false)
+    allow_merge_commit                    = try(r.allow_merge_commit, true)
+    allow_squash_merge                    = try(r.allow_squash_merge, true)
+    allow_rebase_merge                    = try(r.allow_rebase_merge, true)
+    delete_branch_on_merge                = try(r.delete_branch_on_merge, true)
+    has_downloads                         = try(r.has_downloads, false)
+    auto_init                             = try(r.auto_init, true)
+    archived                              = try(r.archived, false)
+    archive_on_destroy                    = try(r.archive_on_destroy, true)
+    vulnerability_alerts                  = try(r.vulnerability_alerts, true)
+    default_branch                        = try(r.default_branch, "master")
+    disable_default_write                 = try(r.disable_default_write, false)
+    create_app_registration               = try(r.create_app_registration, false)
+    enabled                               = try(r.enabled, true)
+    template                              = try(r.template, null)
+    teams                                 = try(r.teams, null)
+    deploy_keys                           = try(r.deploy_keys, [])
+    topics                                = try(r.topics, [])
+    gitignore_template                    = try(r.gitignore_template, null)
+    homepage_url                          = try(r.homepage_url, null)
+    permission                            = try(r.permission, "push")
     include_branch_name_protection_action = try(r.include_branch_name_protection_action, false)
-
-    #branch_protection = try([for policy_key, policy in concat(r.branch_protection, (contains(r.branch_protection.*.pattern, try(r.default_branch, "master")) ? [] : [{}])) : {
 
     branch_protection = try([for policy_key, policy in r.branch_protection : {
       pattern                = try(policy.pattern, try(r.default_branch, "master"))
@@ -70,14 +63,10 @@ locals {
       allows_force_pushes             = try(policy.allows_force_pushes, false)
       require_conversation_resolution = try(policy.require_conversation_resolution, false)
 
-      require_status_checks = try(
-        {
-          strict = policy.require_status_checks.strict
-          # disable_codacy_check here may be undefined
-          contexts = distinct(concat(policy.require_status_checks.contexts, (try(r.disable_codacy_check == true, false) ? [] : local.repo_enforced_status_checks)))
-        },
-        (try(r.disable_codacy_check == true, false) ? null : local.repo_enforced_status_checks)
-      )
+      require_status_checks = try({
+        strict   = policy.require_status_checks.strict
+        contexts = policy.require_status_checks.contexts
+      }, null)
       }],
       [{
         pattern                = try(r.default_branch, "master")
@@ -91,8 +80,8 @@ locals {
         allows_deletions                = false
         allows_force_pushes             = false
         require_conversation_resolution = false
-        require_status_checks           = try(r.disable_codacy_check, false) ? null : local.repo_enforced_status_checks
     }])
+
 
     codeowner = try(r.codeowner, {
       create = false
