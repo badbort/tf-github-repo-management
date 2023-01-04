@@ -20,7 +20,7 @@ resource "null_resource" "github_branch_create" {
   }
 
   depends_on = [
-    github_repository.racwa_repos[each.key]
+    github_repository.racwa_repos
   ]
 }
 
