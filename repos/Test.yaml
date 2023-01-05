@@ -1,9 +1,9 @@
-test5-custom-default-branch:
+test6-custom-default-branch:
   archive_on_destroy: false
   default_branch: asdf
   visibility: public
   auto_init: true
-  codeowners:
+  codeowner:
     approvers:
       - approver: Sample Team2
         comment: Sample Team2
@@ -16,12 +16,12 @@ test5-custom-default-branch:
     - require_pull_request_reviews:
         required_approving_review_count: 0
 
-test5-main-default-branch:
+test6-main-default-branch:
   archive_on_destroy: false
   visibility: public
   default_branch: main
   auto_init: true
-  codeowners:
+  codeowner:
     approvers:
       - approver: Sample Team2
         comment: Sample Team2

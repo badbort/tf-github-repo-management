@@ -20,6 +20,7 @@ jobs:
       tf_apply_branch: main
       tf_plan_args: -var-file="teams-config.tfvars"
       tf_apply_args: -var-file="teams-config.tfvars"
+      mutex_branch: gh-mutex
       
     secrets: 
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
