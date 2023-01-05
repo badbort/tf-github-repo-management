@@ -1,4 +1,4 @@
-test4-custom-default-branch:
+test5-custom-default-branch:
   archive_on_destroy: false
   default_branch: asdf
   visibility: public
@@ -16,7 +16,7 @@ test4-custom-default-branch:
     - require_pull_request_reviews:
         required_approving_review_count: 0
 
-test4-main-default-branch:
+test5-main-default-branch:
   archive_on_destroy: false
   visibility: public
   default_branch: main
