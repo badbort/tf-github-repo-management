@@ -4,7 +4,7 @@ test4-custom-default-branch:
   visibility: public
   auto_init: true
   teams:
-    Sample Team 2: push
+    Sample Team2: push
   branch_protection:
     - require_pull_request_reviews:
         required_approving_review_count: 0
@@ -15,7 +15,7 @@ test4-main-default-branch:
   default_branch: main
   auto_init: true
   teams:
-    Sample Team 2: push
+    Sample Team2: push
   branch_protection:
     - require_pull_request_reviews:
         required_approving_review_count: 0
