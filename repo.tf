@@ -5,7 +5,7 @@ locals {
 resource "github_repository" "racwa_repos" {
   for_each = local.repos_with_defaults
 
-  name                   = each.key
+  name                   = each.value.name
   description            = each.value.description
   homepage_url           = each.value.homepage_url
   visibility             = each.value.visibility
@@ -16,6 +16,7 @@ resource "github_repository" "racwa_repos" {
   allow_merge_commit     = each.value.allow_merge_commit
   allow_squash_merge     = each.value.allow_squash_merge
   allow_rebase_merge     = each.value.allow_rebase_merge
+  allow_auto_merge       = each.value.allow_auto_merge
   delete_branch_on_merge = each.value.delete_branch_on_merge
   has_downloads          = each.value.has_downloads
   auto_init              = each.value.auto_init

@@ -4,7 +4,7 @@
 # The script involved does the following:
 # - If branch already exists, do nothing
 # - If branch doesn't exist, create the new branch which points to the same commit on HEAD
-resource "null_resource" "github_branch_create" {
+resource "null_resource" "github_create_default_branch" {
   for_each = { for name, r in local.repos_with_defaults : r.name => r if r.auto_init && r.default_branch != "main" }
 
   triggers = {
@@ -31,6 +31,6 @@ resource "github_branch_default" "racwa" {
   repository = github_repository.racwa_repos[each.key].name
   branch     = each.value.default_branch
   depends_on = [
-    null_resource.github_branch_create
+    null_resource.github_create_default_branch
   ]
 } 

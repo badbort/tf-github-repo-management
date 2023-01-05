@@ -1,17 +1,21 @@
-test2-custom-default-branch:
+test4-custom-default-branch:
   archive_on_destroy: false
   default_branch: asdf
   visibility: public
   auto_init: true
+  teams:
+    Sample Team 2: push
   branch_protection:
     - require_pull_request_reviews:
         required_approving_review_count: 0
 
-test3-main-default-branch:
+test4-main-default-branch:
   archive_on_destroy: false
   visibility: public
   default_branch: main
   auto_init: true
+  teams:
+    Sample Team 2: push
   branch_protection:
     - require_pull_request_reviews:
         required_approving_review_count: 0
