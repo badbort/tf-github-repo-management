@@ -3,6 +3,13 @@ test4-custom-default-branch:
   default_branch: asdf
   visibility: public
   auto_init: true
+  codeowners:
+    approvers:
+      - approver: Sample Team2
+        comment: Sample Team2
+        pattern: "*"
+        priority: 1
+    create: true
   teams:
     Sample Team2: push
   branch_protection:
@@ -14,6 +21,13 @@ test4-main-default-branch:
   visibility: public
   default_branch: main
   auto_init: true
+  codeowners:
+    approvers:
+      - approver: Sample Team2
+        comment: Sample Team2
+        pattern: "*"
+        priority: 1
+    create: true
   teams:
     Sample Team2: push
   branch_protection:
