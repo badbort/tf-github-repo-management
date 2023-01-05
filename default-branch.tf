@@ -15,9 +15,6 @@ resource "null_resource" "github_create_default_branch" {
     when        = create
     command     = ".'${path.module}\\scripts\\create-default-branch.ps1' -GITHUB_TOKEN \"${var.github_token}\" -BranchName \"${self.triggers.branch}\" -RepositoryOwner \"${var.github_organization}\" -RepositoryName \"${each.value.name}\" "
     interpreter = ["pwsh", "-Command"]
-    environment = {
-      GITHUB_TOKEN = var.github_token
-    }
   }
 
   depends_on = [

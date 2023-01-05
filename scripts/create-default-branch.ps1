@@ -6,6 +6,11 @@
     Behaviour:
     - Should fail if any commands failed
     - Should succeed if branch already exists, or branch was created
+
+    .PARAMETER GITHUB_TOKEN
+    A GitHub PAT that has the following scopes:
+    - read:org
+    - repo
 #>
 
 [CmdletBinding()]

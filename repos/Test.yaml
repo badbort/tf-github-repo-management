@@ -1,33 +1,19 @@
-test6-custom-default-branch:
+test7-custom-default-branch:
   archive_on_destroy: false
   default_branch: asdf
   visibility: public
   auto_init: true
-  codeowner:
-    approvers:
-      - approver: Sample Team2
-        comment: Sample Team2
-        pattern: "*"
-        priority: 1
-    create: true
   teams:
     Sample Team2: push
   branch_protection:
     - require_pull_request_reviews:
         required_approving_review_count: 0
 
-test6-main-default-branch:
+test7-main-default-branch:
   archive_on_destroy: false
   visibility: public
   default_branch: main
   auto_init: true
-  codeowner:
-    approvers:
-      - approver: Sample Team2
-        comment: Sample Team2
-        pattern: "*"
-        priority: 1
-    create: true
   teams:
     Sample Team2: push
   branch_protection:
